@@ -40,13 +40,33 @@ describe OysterCard do
       subject.top_up(10)
       expect{subject.deduct 3}.to change{subject.balance}.by -3
     end
+
   end
 
   describe '#in_journey?' do
 
     it 'should return false when the card is created' do
-      expect(subject.in_journey?).to be false
+      expect(subject).not_to be_in_journey
     end
+
+  end
+
+  describe '#touch_in' do
+
+    it 'should set in_journey? to true' do
+      subject.touch_in
+      expect(subject).to be_in_journey
+    end
+
+  end
+
+  describe '#touch_out' do
+
+    it 'should set in_journey? to false' do
+      subject.touch_out
+      expect(subject).not_to be_in_journey
+    end
+
   end
 
 end
