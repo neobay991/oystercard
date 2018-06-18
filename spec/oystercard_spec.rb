@@ -42,4 +42,11 @@ describe OysterCard do
     end
   end
 
+  describe '#in_journey?' do
+
+    it 'should return false when the card is created' do
+      expect(subject.in_journey?).to be false
+    end
+  end
+
 end
