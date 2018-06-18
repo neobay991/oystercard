@@ -12,7 +12,7 @@ describe OysterCard do
 
   describe '#top_up' do
 
-    it 'should add top-up amount to balance ' do
+    it 'should add top-up amount to balance' do
       subject.top_up(10)
       expect(subject.balance).to eq 10
     end
@@ -20,8 +20,13 @@ describe OysterCard do
     context 'when user tries to top up more than the max' do
 
       it 'should raise an error' do
-        expect(subject.top_up(100)).to raise_error 'Max amount exceeded'
+        expect{subject.top_up(100)}.to raise_error 'Max amount exceeded'
       end
+
+      # it 'the balance should not change' do
+      #   subject.top_up(100)
+      #   expect(subject.balance).to eq 0
+      # end
 
     end
 
