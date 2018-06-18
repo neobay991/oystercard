@@ -4,8 +4,8 @@ describe OysterCard do
 
   describe '#initialize' do
 
-    it 'sets balance to 0' do
-      expect(subject.balance).to eq 0
+    it 'sets balance with a default balance specified by a constant' do
+      expect(subject.balance).to eq OysterCard::DEFAULT_BALANCE
     end
 
   end
