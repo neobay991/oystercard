@@ -8,6 +8,10 @@ describe OysterCard do
       expect(subject.balance).to eq OysterCard::DEFAULT_BALANCE
     end
 
+    it "should create an empty journey history array" do
+      expect(subject.journey_history.size).to eq 0
+    end
+
   end
 
   describe '#top_up' do
@@ -99,19 +103,13 @@ describe OysterCard do
 
   end
 
-  describe '#journey_history' do
+  describe '#add_journey_history' do
 
-    # review this test, atm the array creates 1 element in the array
-    it "should create an empty journey history array" do
-      expect(subject.journey_history.count).to eq 1
-    end
-
-    # review this test, atm the array creates 1 element in the array on initialize
     it "should store the journey history" do
       subject.top_up(10)
       subject.touch_in("Aldgate")
       subject.touch_out("Canary Wharf")
-      expect(subject.journey_history.count).to eq 2
+      expect(subject.journey_history.size).to eq 1
     end
   end
 
