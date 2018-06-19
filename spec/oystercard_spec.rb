@@ -78,6 +78,13 @@ describe OysterCard do
       expect(subject).not_to be_in_journey
     end
 
+    it "should forget the entry staton on touch_out" do
+      subject.top_up(10)
+      subject.touch_in("Aldgate")
+      subject.touch_out
+      expect(subject.entry_station).to eq nil
+    end
+
     it 'should reduce the balance by minimum fare' do
       subject.top_up(20)
       subject.touch_out
