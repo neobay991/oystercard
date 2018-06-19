@@ -72,6 +72,12 @@ describe OysterCard do
       expect(subject).not_to be_in_journey
     end
 
+    it 'should reduce the balance by minimum fare' do
+      subject.top_up(20)
+      subject.touch_out
+      expect{subject.deduct OysterCard::MIN_AMOUNT}.to change{subject.balance}.by -OysterCard::MIN_AMOUNT
+    end
+
   end
 
 end

@@ -28,11 +28,12 @@ class OysterCard
   end
 
   def touch_out
+    deduct(MIN_AMOUNT)
     @in_journey = false
   end
 
   def in_journey?
     @in_journey
   end
-
+  
 end
