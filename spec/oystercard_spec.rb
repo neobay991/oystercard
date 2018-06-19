@@ -53,11 +53,11 @@ describe OysterCard do
 
   describe '#touch_in' do
 
-    # it 'should set in_journey? to true' do
-    #   subject.top_up(10)
-    #   subject.touch_in
-    #   expect(subject).to be_in_journey
-    # end
+    it 'should set in_journey? to true' do
+      subject.top_up(10)
+      subject.touch_in("Aldgate")
+      expect(subject).to be_in_journey
+    end
 
      it "should record the entry_station" do
       subject.top_up(10)
@@ -65,9 +65,9 @@ describe OysterCard do
       expect(subject.entry_station).to eq "Aldgate"
     end
 
-    # it 'should raise an error if balance is below minimum' do
-    #   expect{subject.touch_in}.to raise_error "cannot touch in, balance is below minimum amount"
-    # end
+    it 'should raise an error if balance is below minimum' do
+      expect{subject.touch_in("Aldgate")}.to raise_error "cannot touch in, balance is below minimum amount"
+    end
 
   end
 
