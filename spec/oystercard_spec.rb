@@ -74,22 +74,28 @@ describe OysterCard do
   describe '#touch_out' do
 
     it 'should set in_journey? to false' do
-      subject.touch_out
+      subject.touch_out("Canary Wharf")
       expect(subject).not_to be_in_journey
     end
 
     it "should forget the entry staton on touch_out" do
       subject.top_up(10)
       subject.touch_in("Aldgate")
-      subject.touch_out
+      subject.touch_out("Canary Wharf")
       expect(subject.entry_station).to eq nil
     end
 
     it 'should reduce the balance by minimum fare' do
       subject.top_up(20)
-      subject.touch_out
+      subject.touch_out("Canary Wharf")
       expect{subject.deduct OysterCard::MIN_AMOUNT}.to change{subject.balance}.by -OysterCard::MIN_AMOUNT
     end
+
+    it "should record the exit_station" do
+     subject.top_up(10)
+     subject.touch_out("Canary Wharf")
+     expect(subject.exit_station).to eq "Canary Wharf"
+   end
 
   end
 
