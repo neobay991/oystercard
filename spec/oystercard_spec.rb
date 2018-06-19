@@ -60,7 +60,7 @@ describe OysterCard do
     end
 
     it 'should raise an error if balance is below minimum' do
-      expect{subject.touch_in}.to raise_error "cannot touch in, balance is below minimum"
+      expect{subject.touch_in}.to raise_error "cannot touch in, balance is below minimum amount"
     end
 
   end

@@ -1,7 +1,7 @@
 class OysterCard
 
   DEFAULT_BALANCE = 0
-  MIN_BALANCE = 1
+  MIN_AMOUNT = 1
   MAX_BALANCE = 90
 
 
@@ -23,7 +23,7 @@ class OysterCard
   end
 
   def touch_in
-    fail "cannot touch in, balance is below minimum" if @balance < MIN_BALANCE
+    fail "cannot touch in, balance is below minimum amount" if @balance < MIN_AMOUNT
     @in_journey = true
   end
 
