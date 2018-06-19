@@ -59,7 +59,7 @@ describe OysterCard do
       expect(subject).to be_in_journey
     end
 
-     it "should record the entry_station" do
+    it "should record the entry_station" do
       subject.top_up(10)
       subject.touch_in("Aldgate")
       expect(subject.entry_station).to eq "Aldgate"
@@ -92,9 +92,9 @@ describe OysterCard do
     end
 
     it "should record the exit_station" do
-     subject.top_up(10)
-     subject.touch_out("Canary Wharf")
-     expect(subject.exit_station).to eq "Canary Wharf"
+      subject.top_up(10)
+      subject.touch_out("Canary Wharf")
+      expect(subject.exit_station).to eq "Canary Wharf"
    end
 
   end
