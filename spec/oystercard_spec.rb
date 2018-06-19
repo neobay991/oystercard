@@ -99,4 +99,20 @@ describe OysterCard do
 
   end
 
+  describe '#journey_history' do
+
+    # review this test, atm the array creates 1 element in the array
+    it "should create an empty journey history array" do
+      expect(subject.journey_history.count).to eq 1
+    end
+
+    # review this test, atm the array creates 1 element in the array on initialize
+    it "should store the journey history" do
+      subject.top_up(10)
+      subject.touch_in("Aldgate")
+      subject.touch_out("Canary Wharf")
+      expect(subject.journey_history.count).to eq 2
+    end
+  end
+
 end
