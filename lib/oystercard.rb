@@ -5,7 +5,7 @@ class OysterCard
   MAX_BALANCE = 90
 
   attr_reader :balance, :entry_station, :exit_station, :journey_history
-  attr_accessor :in_journey
+  #attr_accessor :in_journey
 
   def initialize(balance = DEFAULT_BALANCE)
     @in_journey = false
@@ -21,7 +21,7 @@ class OysterCard
   def touch_in(entry_station)
     fail "cannot touch in, balance is below minimum amount" if @balance < MIN_AMOUNT
     @entry_station = entry_station
-    @in_journey = true
+    #@in_journey = true
 
   end
 
@@ -30,7 +30,7 @@ class OysterCard
     @exit_station = exit_station
     add_journey_history
     @entry_station = nil
-    @in_journey = false
+    #@in_journey = false
 
   end
 
@@ -39,7 +39,8 @@ class OysterCard
   end
 
   def in_journey?
-    @in_journey
+    @entry_station
+  #  @in_journey
   end
 
   # private
