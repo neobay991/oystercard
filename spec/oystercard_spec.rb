@@ -57,20 +57,25 @@ describe OysterCard do
 
   describe '#touch_in' do
 
+    let(:entry_station) { double :station }
+    let(:exit_station) { double :station }
+
     it 'should set in_journey? to true' do
       subject.top_up(10)
-      subject.touch_in("Aldgate")
+      subject.touch_in(entry_station)
       expect(subject).to be_in_journey
     end
 
+    let(:station) { double :station }
+
     it "should record the entry_station" do
       subject.top_up(10)
-      subject.touch_in("Aldgate")
-      expect(subject.entry_station).to eq "Aldgate"
+      subject.touch_in(station)
+      expect(subject.entry_station).to eq station
     end
 
     it 'should raise an error if balance is below minimum' do
-      expect{subject.touch_in("Aldgate")}.to raise_error "cannot touch in, balance is below minimum amount"
+      expect{subject.touch_in(entry_station)}.to raise_error "cannot touch in, balance is below minimum amount"
     end
 
   end
@@ -118,6 +123,16 @@ describe OysterCard do
       subject.touch_out(exit_station)
       expect(subject.journey_history.size).to eq 1
     end
+
+    # let(:zone) { double :station }
+    # let(:zone) { double :station }
+    #
+    # it "should now stoe information about zones" do
+    #   subject.top_up(10)
+    #   subject.touch_in(zone)
+    #   subject.touch_out(zone)
+    #   expect(subject.journey_history[0][zone]).to eq zone
+    # end
   end
 
 end

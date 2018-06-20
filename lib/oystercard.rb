@@ -1,3 +1,5 @@
+require_relative './station.rb'
+
 class OysterCard
 
   DEFAULT_BALANCE = 0
@@ -5,10 +7,10 @@ class OysterCard
   MAX_BALANCE = 90
 
   attr_reader :balance, :entry_station, :exit_station, :journey_history
-  #attr_accessor :in_journey
+  # attr_accessor :in_journey
 
   def initialize(balance = DEFAULT_BALANCE)
-    @in_journey = false
+    #@in_journey = false
     @balance = balance
     @journey_history = []
   end
@@ -18,9 +20,9 @@ class OysterCard
     @balance += number
   end
 
-  def touch_in(entry_station)
+  def touch_in(station)
     fail "cannot touch in, balance is below minimum amount" if @balance < MIN_AMOUNT
-    @entry_station = entry_station
+    @entry_station = station
     #@in_journey = true
 
   end
