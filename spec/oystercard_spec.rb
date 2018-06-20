@@ -9,7 +9,7 @@ describe OysterCard do
     end
 
     it "should create an empty journey history array" do
-      expect(subject.journey_history.size).to eq 0
+      expect(subject.journey_history).to be_empty
     end
 
   end
@@ -104,7 +104,6 @@ describe OysterCard do
   end
 
   describe '#add_journey_history' do
-
     it "should store the journey history" do
       subject.top_up(10)
       subject.touch_in("Aldgate")

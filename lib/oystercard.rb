@@ -35,7 +35,7 @@ class OysterCard
   end
 
   def add_journey_history
-    @journey_history << { :entry => @entry_station, :exit => @exit_station }
+    @journey_history << { :entry_s => @entry_station, :exit_s => @exit_station }
   end
 
   def in_journey?
