@@ -41,7 +41,7 @@ class OysterCard
   end
 
   def in_journey?
-    @entry_station
+    !!entry_station
   #  @in_journey
   end
 
