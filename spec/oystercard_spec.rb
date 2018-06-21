@@ -38,14 +38,18 @@ describe OysterCard do
 
   end
 
-  describe '#deduct' do
-
-    it 'should deduct the fare amount from balance' do
-      subject.top_up(10)
-      expect{subject.deduct 3}.to change{subject.balance}.by -3
-    end
-
-  end
+  # describe '#deduct' do
+  #
+  #   let(:entry_station) { double :station, name: "Aldgate", zone: 1 }
+  #   let(:exit_station) { double :station, name: "Stratford", zone: 3 }
+  #
+  #   it 'should deduct the fare amount from balance' do
+  #     subject.top_up(10)
+  #     subject.touch_out(exit_station)
+  #     expect{subject.deduct 3}.to change{subject.balance}.by -3
+  #   end
+  #
+  # end
 
   describe '#in_journey?' do
 
@@ -103,11 +107,11 @@ describe OysterCard do
       expect(subject.entry_station).to eq nil
     end
 
-    it 'should reduce the balance by minimum fare' do
-      subject.top_up(20)
-      subject.touch_out(exit_station)
-      expect{subject.deduct OysterCard::MIN_AMOUNT}.to change{subject.balance}.by -OysterCard::MIN_AMOUNT
-    end
+    # it 'should reduce the balance by minimum fare' do
+    #   subject.top_up(20)
+    #   subject.touch_out(exit_station)
+    #   expect{subject.deduct OysterCard::MIN_AMOUNT}.to change{subject.balance}.by -OysterCard::MIN_AMOUNT
+    # end
     #
     # let(:station) { double :station, name: "Stratford", zone: 3 }
     #
@@ -125,6 +129,34 @@ describe OysterCard do
 
   end
 
+  describe '#fare' do
+
+    let(:entry_station) { double :station, name: "Aldgate", zone: 1 }
+    let(:exit_station) { double :station, name: "Stratford", zone: 3 }
+
+    it 'should charge a minimum charge' do
+      subject.top_up(10)
+      subject.touch_in(entry_station)
+      subject.touch_out(exit_station)
+      subject.fare
+      expect(subject.balance).to eq 9
+    end
+
+    it 'should charge a penalty charge if fail to touch in' do
+      subject.top_up(10)
+      subject.touch_out(exit_station)
+      subject.fare
+      expect(subject.balance).to eq 4
+    end
+
+    it 'should charge a penalty charge if fail to touch out' do
+      subject.top_up(10)
+      subject.touch_in(entry_station)
+      subject.fare
+      expect(subject.balance).to eq 4
+    end
+
+  end
   # describe '#add_journey_history' do
   #
   #   context 'when the user completes a journey' do
