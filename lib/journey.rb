@@ -48,10 +48,10 @@ class Journey
   private
 
   def reset_journey
-    @entry_station = nil
-    @entry_station_zone = nil
-    @exit_station = nil
-    @exit_station_zone = nil
+    entry_station = nil
+    entry_station_zone = nil
+    exit_station = nil
+    exit_station_zone = nil
   end
 
 end

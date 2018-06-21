@@ -66,12 +66,22 @@ class OysterCard
       number = PENALTY_AMOUNT
     end
     deduct(number)
+    reset_touch_in
+    reset_touch_out
   end
 
   private
 
   def deduct(number)
     @balance -= number
+  end
+
+  def reset_touch_in
+    touch_in = false
+  end
+
+  def reset_touch_out
+    touch_out = false
   end
 
 end
