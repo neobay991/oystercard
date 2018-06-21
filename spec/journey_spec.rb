@@ -36,9 +36,9 @@ describe Journey do
   describe '#end_journey ' do
 
     let(:station) { double :station, name: "Aldgate", zone: 1 }
+    let(:card) { OysterCard.new}
 
     it "should record the entry_station" do
-      card = OysterCard.new
       card.top_up(10)
       subject.start_journey(station)
       subject.end_journey(station)
@@ -46,7 +46,6 @@ describe Journey do
     end
 
     it "should record the entry_station zone" do
-      card = OysterCard.new
       card.top_up(10)
       card.touch_in(station)
       subject.start_journey(station)
@@ -67,7 +66,7 @@ describe Journey do
         subject.start_journey(entry_station)
         subject.end_journey(exit_station)
         subject.add_journey_entry
-        expect(subject.journey_history.size).to eq 1
+        expect(subject.journey_history).to include journey
       end
     end
   end
@@ -93,6 +92,5 @@ describe Journey do
     end
 
   end
-
 
 end

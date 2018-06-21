@@ -53,8 +53,10 @@ describe OysterCard do
 
   describe '#in_journey?' do
 
+    let(:journey) { double :journey }
+    
     it 'should return false when the card is created' do
-      expect(subject).not_to be_in_journey
+      expect(subject.journey).not_to be_in_journey
     end
 
   end
@@ -63,11 +65,12 @@ describe OysterCard do
 
     let(:entry_station) { double :station, name: "Aldgate", zone: 1 }
     let(:exit_station) { double :station, name: "Stratford", zone: 3 }
+    let(:journey) { double :journey }
 
     it 'should set in_journey? to true' do
       subject.top_up(10)
       subject.touch_in(entry_station)
-      expect(subject).to be_in_journey
+      expect(subject.journey).to be_in_journey
     end
 
     # let(:station) { double :station, name: "Aldgate", zone: 1 }
@@ -94,10 +97,11 @@ describe OysterCard do
 
     let(:entry_station) { double :station, name: "Aldgate", zone: 1 }
     let(:exit_station) { double :station, name: "Stratford", zone: 3 }
+    let(:journey) { double :journey }
 
     it 'should set in_journey? to false' do
       subject.touch_out(exit_station)
-      expect(subject).not_to be_in_journey
+      expect(subject.journey).not_to be_in_journey
     end
 
     it "should forget the entry station on touch_out" do

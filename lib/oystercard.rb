@@ -9,7 +9,7 @@ class OysterCard
   MIN_AMOUNT = 1
   PENALTY_AMOUNT = 6
 
-  attr_reader :balance, :entry_station, :journey, :touch_in, :touch_out
+  attr_reader :balance, :touch_in, :touch_out, :journey, :entry_station
   # attr_accessor :in_journey
 
   def initialize(balance = DEFAULT_BALANCE)
@@ -53,11 +53,11 @@ class OysterCard
   # #@journey_history << { :entry_s => @entry_station, :entry_s_zone => @entry_station_zone, :exit_s => @exit_station, :exit_s_zone => @exit_station_zone }
   # end
 
-  def in_journey?
-    journey.in_journey?
-    #check if there is an entry_station returned
-    #!!entry_station
-  end
+  # def in_journey?
+  #   journey.in_journey?
+  #   #check if there is an entry_station returned
+  #   #!!entry_station
+  # end
 
   def fare
     if @touch_in == true && @touch_out == true
