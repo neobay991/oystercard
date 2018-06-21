@@ -6,4 +6,12 @@ class Station
     @name = station_name
     @zone = station_zone
   end
+
+  def name
+    @name
+  end
+
+  def zone
+    @zone
+  end
 end

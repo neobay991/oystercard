@@ -57,8 +57,8 @@ describe OysterCard do
 
   describe '#touch_in' do
 
-    let(:entry_station) { double :station }
-    let(:exit_station) { double :station }
+    let(:entry_station) { double :station, name: "Aldgate", zone: 1 }
+    let(:exit_station) { double :station, name: "Stratford", zone: 3 }
 
     it 'should set in_journey? to true' do
       subject.top_up(10)
@@ -66,31 +66,37 @@ describe OysterCard do
       expect(subject).to be_in_journey
     end
 
-    let(:station) { double :station }
+    let(:station) { double :station, name: "Aldgate", zone: 1 }
 
     it "should record the entry_station" do
       subject.top_up(10)
       subject.touch_in(station)
-      expect(subject.entry_station).to eq station
+      expect(subject.entry_station).to eq station.name
     end
 
-    it 'should raise an error if balance is below minimum' do
-      expect{subject.touch_in(entry_station)}.to raise_error "cannot touch in, balance is below minimum amount"
+    it "should record the entry_station zone" do
+      subject.top_up(10)
+      subject.touch_in(station)
+      expect(subject.entry_station_zone).to eq station.zone
     end
+
+    # it 'should raise an error if balance is below minimum' do
+    #   expect{subject.touch_in(entry_station)}.to raise_error "cannot touch in, balance is below minimum amount"
+    # end
 
   end
 
   describe '#touch_out' do
 
-    let(:entry_station) { double :station }
-    let(:exit_station) { double :station }
+    let(:entry_station) { double :station, name: "Aldgate", zone: 1 }
+    let(:exit_station) { double :station, name: "Stratford", zone: 3 }
 
     it 'should set in_journey? to false' do
       subject.touch_out(exit_station)
       expect(subject).not_to be_in_journey
     end
 
-    it "should forget the entry staton on touch_out" do
+    it "should forget the entry station on touch_out" do
       subject.top_up(10)
       subject.touch_in(entry_station)
       subject.touch_out(exit_station)
@@ -103,36 +109,49 @@ describe OysterCard do
       expect{subject.deduct OysterCard::MIN_AMOUNT}.to change{subject.balance}.by -OysterCard::MIN_AMOUNT
     end
 
+    let(:station) { double :station, name: "Stratford", zone: 3 }
+
     it "should record the exit_station" do
       subject.top_up(10)
-      subject.touch_in(entry_station)
-      subject.touch_out(exit_station)
-      expect(subject.exit_station).to eq exit_station
+      subject.touch_out(station)
+      expect(subject.exit_station).to eq station.name
    end
+
+   it "should record the exit_station zone" do
+     subject.top_up(10)
+     subject.touch_out(station)
+     expect(subject.exit_station_zone).to eq station.zone
+  end
 
   end
 
   describe '#add_journey_history' do
 
-    let(:entry_station) { double :station }
-    let(:exit_station) { double :station }
+    context 'when the user completes a journey' do
 
-    it "should store the journey history" do
-      subject.top_up(10)
-      subject.touch_in(entry_station)
-      subject.touch_out(exit_station)
-      expect(subject.journey_history.size).to eq 1
+      # let(:entry_station) { double :station, name: "Aldgate", zone: 1 }
+      # let(:exit_station) { double :station, name: "Stratford", zone: 3 }
+      #
+      # it "should store the journey history" do
+      #   subject.top_up(10)
+      #   subject.touch_in(entry_station)
+      #   subject.touch_out(exit_station)
+      #   expect(subject.journey_history.size).to eq 1
+      # end
+
+      let(:journey) {{ entry_s: "Aldgate", entry_s_zone: 1, exit_s: "Stratford" , exit_s_zone: 3 } }
+      let(:entry_station) { double :station, name: "Aldgate", zone: 1 }
+      let(:exit_station) { double :station, name: "Stratford", zone: 3 }
+
+      it 'should store the journey history' do
+        subject.top_up(10)
+        subject.touch_in(entry_station)
+        subject.touch_out(exit_station)
+        expect(subject.journey_history).to include journey
+      end
+
     end
 
-    # let(:zone) { double :station }
-    # let(:zone) { double :station }
-    #
-    # it "should now stoe information about zones" do
-    #   subject.top_up(10)
-    #   subject.touch_in(zone)
-    #   subject.touch_out(zone)
-    #   expect(subject.journey_history[0][zone]).to eq zone
-    # end
   end
 
 end
