@@ -1,8 +1,6 @@
 require_relative './oystercard.rb'
 require_relative './station.rb'
 
-# should be responsible for starting a journey, finishing a journey, calculating the fare of a journey, and returning whether or not the journey is complete.
-
 class Journey
 
   attr_reader :journey_history, :in_journey, :journey_complete, :entry_station, :entry_station_zone, :exit_station, :exit_station_zone
