@@ -28,7 +28,7 @@ class Journey
   end
 
   def add_journey_entry
-    if journey_complete = true && entry_station != nil
+    if journey_complete == true && in_journey == false
       journey_history << { :entry_s => entry_station, :entry_s_zone => entry_station_zone, :exit_s => exit_station, :exit_s_zone => exit_station_zone }
 
       reset_journey

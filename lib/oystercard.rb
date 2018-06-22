@@ -9,7 +9,7 @@ class OysterCard
   MIN_AMOUNT = 1
   PENALTY_AMOUNT = 6
 
-  attr_reader :balance, :touch_in, :touch_out, :journey, :entry_station
+  attr_reader :balance, :touch_in, :touch_out, :journey, :entry_station, :fare_amount
   # attr_accessor :in_journey
 
   def initialize(balance = DEFAULT_BALANCE)
@@ -38,10 +38,10 @@ class OysterCard
 
   def touch_out(station)
     journey.end_journey(station)
-    @touch_out = true
-    #deduct(MIN_AMOUNT)
     journey.add_journey_entry
-
+    @touch_out = true
+    fare
+    #deduct(MIN_AMOUNT)
     #exit_station = station.name
     # @exit_station_zone = station.zone
     # entry_station = nil
@@ -61,14 +61,30 @@ class OysterCard
 
   def fare
     if @touch_in == true && @touch_out == true
-      number = MIN_AMOUNT
+      if journey.exit_station_zone == journey.entry_station_zone
+        @fare_amount = MIN_AMOUNT
+      elsif journey.exit_station_zone > journey.entry_station_zone
+        @fare_amount = MIN_AMOUNT + (journey.exit_station_zone - journey.entry_station_zone)
+      elsif journey.entry_station_zone > journey.exit_station_zone
+        @fare_amount = MIN_AMOUNT + (journey.entry_station_zone - journey.exit_station_zone)
+      end
     else
-      number = PENALTY_AMOUNT
+      @fare_amount  = PENALTY_AMOUNT
     end
-    deduct(number)
     reset_touch_in
     reset_touch_out
+    deduct(@fare_amount)
   end
+
+  # def fare_lookup
+  #   if journey.exit_station_zone == journey.entry_station_zone
+  #     @fare_amount = MIN_AMOUNT
+  #   elsif journey.exit_station_zone > journey.entry_station_zone
+  #     @fare_amount = MIN_AMOUNT + (journey.exit_station_zone - journey.entry_station_zone)
+  #   elsif journey.entry_station_zone > journey.exit_station_zone
+  #     @fare_amount = MIN_AMOUNT + (journey.entry_station_zone - journey.exit_station_zone)
+  #   end
+  # end
 
   private
 

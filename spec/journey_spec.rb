@@ -16,7 +16,7 @@ describe Journey do
 
     let(:station) { double :station, name: "Aldgate", zone: 1 }
 
-    it "should record the entry_station" do
+    it "should record the entry station" do
       card = OysterCard.new
       card.top_up(10)
       card.touch_in(station)
@@ -24,7 +24,7 @@ describe Journey do
       expect(subject.entry_station).to eq station.name
     end
 
-    it "should record the entry_station zone" do
+    it "should record the entry station zone" do
       card = OysterCard.new
       card.top_up(10)
       card.touch_in(station)
@@ -35,23 +35,24 @@ describe Journey do
 
   describe '#end_journey ' do
 
-    let(:station) { double :station, name: "Aldgate", zone: 1 }
-    let(:card) { OysterCard.new}
+    # let(:station) { double :station, name: "Aldgate", zone: 1 }
+    # let(:card) { OysterCard.new}
 
-    it "should record the entry_station" do
+    it "should record the exit station" do
+      card = OysterCard.new
       card.top_up(10)
-      subject.start_journey(station)
-      subject.end_journey(station)
+      #subject.start_journey(station = Station.new(“aaa”, 1))
+      subject.end_journey(station = Station.new('ccc', 2))
       expect(subject.exit_station).to eq station.name
     end
 
-    it "should record the entry_station zone" do
-      card.top_up(10)
-      card.touch_in(station)
-      subject.start_journey(station)
-      subject.end_journey(station)
-      expect(subject.exit_station_zone).to eq station.zone
-    end
+    # it "should record the exit station zone" do
+    #   card.top_up(10)
+    #   card.touch_in(station)
+    #   subject.start_journey(station)
+    #   subject.end_journey(station)
+    #   expect(subject.exit_station_zone).to eq station.zone
+    # end
   end
 
   describe '#add_journey_entry' do
