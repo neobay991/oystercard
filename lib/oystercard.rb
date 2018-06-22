@@ -10,7 +10,6 @@ class OysterCard
   PENALTY_AMOUNT = 6
 
   attr_reader :balance, :touch_in, :touch_out, :journey, :entry_station, :fare_amount
-  # attr_accessor :in_journey
 
   def initialize(balance = DEFAULT_BALANCE)
     # @in_journey = false

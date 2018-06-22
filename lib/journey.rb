@@ -36,12 +36,12 @@ class Journey
   end
 
   def in_journey?
-    #check if there is an entry_station returned
+    #check if in journey
     !!in_journey
   end
 
   def journey_complete?
-    #check if there is an entry_station returned
+    #check if journey complete
     !!journey_complete
   end
 
