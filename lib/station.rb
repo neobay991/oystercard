@@ -6,5 +6,4 @@ class Station
     @name = station_name
     @zone = station_zone
   end
-
 end
