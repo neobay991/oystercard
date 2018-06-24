@@ -9,14 +9,14 @@ class OysterCard
   MIN_AMOUNT = 1
   PENALTY_AMOUNT = 6
 
-  attr_reader :balance, :touch_in, :touch_out, :journey, :entry_station,
+  attr_reader :balance, :card_touch_in, :card_touch_out, :journey, :entry_station,
   :fare_amount
 
   def initialize(balance = DEFAULT_BALANCE)
     # @in_journey = false
     @balance = balance
-    @touch_in = false
-    @touch_out = false
+    @card_touch_in = false
+    @card_touch_out = false
     # @journey_history = []
     @journey = Journey.new
   end
@@ -29,18 +29,18 @@ class OysterCard
   def touch_in(station)
     fail "cannot touch in, balance is below minimum amount" if balance < MIN_AMOUNT
     journey.start_journey(station)
-    @touch_in = true
+    @card_touch_in = true
   end
 
   def touch_out(station)
     journey.end_journey(station)
     journey.add_journey_entry
-    @touch_out = true
+    @card_touch_out = true
     fare
   end
 
   def fare
-    if @touch_in == true && @touch_out == true
+    if @card_touch_in == true && @card_touch_out == true
       if journey.exit_station_zone == journey.entry_station_zone
         @fare_amount = MIN_AMOUNT
       elsif journey.exit_station_zone > journey.entry_station_zone
@@ -63,11 +63,11 @@ class OysterCard
   end
 
   def reset_touch_in
-    touch_in = false
+    card_touch_in = false
   end
 
   def reset_touch_out
-    touch_out = false
+    card_touch_out = false
   end
 
 end
