@@ -9,8 +9,8 @@ class OysterCard
   MIN_AMOUNT = 1
   PENALTY_AMOUNT = 6
 
-  attr_reader :balance, :card_touch_in, :card_touch_out, :journey, :entry_station,
-  :fare_amount
+  attr_reader :balance, :card_touch_in, :card_touch_out, :journey,
+              :entry_station, :fare_amount
 
   def initialize(balance = DEFAULT_BALANCE)
     # @in_journey = false
@@ -49,7 +49,7 @@ class OysterCard
         @fare_amount = MIN_AMOUNT + (journey.entry_station_zone - journey.exit_station_zone)
       end
     else
-      @fare_amount  = PENALTY_AMOUNT
+      @fare_amount = PENALTY_AMOUNT
     end
     reset_touch_in
     reset_touch_out
