@@ -3,14 +3,12 @@ require 'oystercard'
 describe OysterCard do
 
   describe '#initialize' do
-
     it 'should set balance with a default balance specified by a constant' do
       expect(subject.balance).to eq OysterCard::DEFAULT_BALANCE
     end
   end
 
   describe '#top_up' do
-
     it 'should add top-up amount to balance' do
       subject.top_up(10)
       expect(subject.balance).to eq 10
@@ -49,7 +47,6 @@ describe OysterCard do
   end
 
   describe '#touch_out' do
-
     let(:entry_station) { double :station, name: 'Aldgate', zone: 1 }
     let(:exit_station) { double :station, name: 'Stratford', zone: 3 }
     let(:journey) { double :journey }
@@ -69,7 +66,6 @@ describe OysterCard do
   end
 
   describe '#fare' do
-
     let(:entry_station_z1) { double :station, name: 'Stratford', zone: 1 }
     let(:exit_station_z1) { double :station, name: "Oxford Street", zone: 1 }
 
@@ -185,7 +181,5 @@ describe OysterCard do
         expect(subject.balance).to eq 6
       end
     end
-
   end
-
 end
