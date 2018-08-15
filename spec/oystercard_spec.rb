@@ -1,7 +1,6 @@
 require 'oystercard'
 
 describe OysterCard do
-
   describe '#initialize' do
     it 'should set balance with a default balance specified by a constant' do
       expect(subject.balance).to eq OysterCard::DEFAULT_BALANCE
@@ -18,7 +17,8 @@ describe OysterCard do
       it 'should raise an error' do
         maximum_balance = OysterCard::MAX_BALANCE
         subject.top_up(maximum_balance)
-        expect{ subject.top_up(1) }.to raise_error "Maximum balance of #{maximum_balance} exceeded"
+        expect { subject.top_up(1) }.to raise_error
+        "Maximum balance of #{maximum_balance} exceeded"
       end
     end
   end
@@ -29,7 +29,6 @@ describe OysterCard do
     it 'should return false when the card is created' do
       expect(subject.journey).not_to be_in_journey
     end
-
   end
 
   describe '#touch_in' do
@@ -42,7 +41,6 @@ describe OysterCard do
       subject.touch_in(entry_station)
       expect(subject.journey).to be_in_journey
     end
-
   end
 
   describe '#touch_out' do
@@ -61,18 +59,17 @@ describe OysterCard do
       subject.touch_out(exit_station)
       expect(subject.entry_station).to eq nil
     end
-
   end
 
   describe '#fare' do
-    let(:entry_station_z1) { double :station, name: "Stratford", zone: 1 }
-    let(:entry_station_z2) { double :station, name: "Canary Wharf", zone: 2 }
-    let(:entry_station_z3) { double :station, name: "Stratford", zone: 3 }
-    let(:entry_station_z4) { double :station, name: "Richmond", zone: 4 }
-    let(:exit_station_z1) { double :station, name: "Oxford Street", zone: 1 }
-    let(:exit_station_z2) { double :station, name: "Canada Water", zone: 2 }
-    let(:exit_station_z3) { double :station, name: "Canning Town", zone: 3 }
-    let(:exit_station_z4) { double :station, name: "Barking", zone: 4 }
+    let(:entry_station_z1) { double :station, name: 'Stratford', zone: 1 }
+    let(:entry_station_z2) { double :station, name: 'Canary Wharf', zone: 2 }
+    let(:entry_station_z3) { double :station, name: 'Stratford', zone: 3 }
+    let(:entry_station_z4) { double :station, name: 'Richmond', zone: 4 }
+    let(:exit_station_z1) { double :station, name: 'Oxford Street', zone: 1 }
+    let(:exit_station_z2) { double :station, name: 'Canada Water', zone: 2 }
+    let(:exit_station_z3) { double :station, name: 'Canning Town', zone: 3 }
+    let(:exit_station_z4) { double :station, name: 'Barking', zone: 4 }
 
     it 'should charge a minimum charge' do
       subject.top_up(10)
@@ -124,7 +121,8 @@ describe OysterCard do
       end
     end
 
-    context 'calculating the fare even if the exit zone is higher than the entry zone' do
+    context 'calculating the fare even if the exit zone is higher
+      than the entry zone' do
       it 'should charge £4 for crossing 3 zones' do
         subject.top_up(10)
         subject.touch_in(entry_station_z4)

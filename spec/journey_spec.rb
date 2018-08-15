@@ -41,8 +41,8 @@ describe Journey do
   describe '#add_journey_entry' do
     context 'when the user completes a journey' do
       let(:journey) {
-        { entry_s: 'Aldgate', entry_s_zone: 1,
-        exit_s: 'Stratford', exit_s_zone: 3 }
+        { entry_s: 'Aldgate', entry_s_zone: 1, exit_s: 'Stratford',
+          exit_s_zone: 3 }
       }
       let(:entry_station) { double :station, name: 'Aldgate', zone: 1 }
       let(:exit_station) { double :station, name: 'Stratford', zone: 3 }
