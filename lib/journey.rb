@@ -1,9 +1,12 @@
+# frozen_string_literal: true
+
 require_relative './oystercard.rb'
 require_relative './station.rb'
 
+# :nodoc:
 class Journey
   attr_reader :journey_history, :in_journey, :journey_complete, :entry_station,
-  :entry_station_zone, :exit_station, :exit_station_zone
+              :entry_station_zone, :exit_station, :exit_station_zone
 
   def initialize
     @journey_history = []
@@ -28,8 +31,8 @@ class Journey
   def add_journey_entry
     if journey_complete == true && in_journey == false
       journey_history << { entry_s: entry_station,
-      entry_s_zone: entry_station_zone, exit_s: exit_station,
-      exit_s_zone: exit_station_zone }
+                           entry_s_zone: entry_station_zone, exit_s: exit_station,
+                           exit_s_zone: exit_station_zone }
     end
   end
 
